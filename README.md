@@ -1,7 +1,14 @@
 # Flipkart Chatbot (Prototype)
 
 ## Description
-The Flipkart Chatbot is a prototype application designed to assist users in searching for products on the Flipkart website. It utilizes web scraping techniques to gather product information and presents it in a chat interface.
+The Flipkart Chatbot is an innovative application designed to streamline the product search experience for users on the Flipkart e-commerce platform. This chatbot leverages cutting-edge technologies to provide users with an intuitive and interactive interface for discovering products of interest.
+
+Using a combination of web scraping and natural language processing techniques, the Flipkart Chatbot enables users to search for products using natural language queries. The chatbot parses user inputs, extracts relevant keywords, and performs searches on the Flipkart website to retrieve matching products.
+
+The chat interface mimics a conversation between the user and the chatbot, creating a seamless and engaging user experience. Users can enter their queries in plain text, and the chatbot responds with a curated list of product recommendations, complete with images, prices, and ratings.
+
+Built on the Flask web framework, the Flipkart Chatbot offers a scalable and flexible solution for product discovery. The backend logic, written in Python, orchestrates the entire process, from handling user requests to scraping product data and generating responses.
+
 
 ## Features
 - **Chat Interface:** Users can interact with the chatbot using a simple text input field.
