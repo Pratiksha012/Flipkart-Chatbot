@@ -28,8 +28,7 @@ Built on the Flask web framework, the Flipkart Chatbot offers a scalable and fle
 2. Web Scrape flipkart website using `flipkart_scraper.py` file.
 3. Run the Flask application by executing the `app.py` file.
 4. Access the application through your web browser at `http://localhost:8080`.
-5. 
-6. Enter your queries in the chat input field and click submit to receive product recommendations.
+5. Enter your queries in the chat input field and click submit to receive product recommendations.
 
 ## Future Improvements
 1. **Enhanced User Interface:** Improve the aesthetics and functionality of the chat interface.
