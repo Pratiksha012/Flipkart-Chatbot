@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flipkart Chatbot</title>
+<style>
+
+body { 
+    font-family: Arial, sans-serif; 
+    background-color: #f7f7f7; 
+    margin: 0; 
+    padding: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+} 
+    
+.chat-container { 
+    width: 90%; 
+    max-width: 900px;
+    height: 90vh;
+    background-color: #fff; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
+    overflow: hidden; 
+    margin-top: 10px; 
+    display: flex; 
+    flex-direction: column; 
+} 
+    
+.chat-header { 
+    background-color: #007bff; 
+    color: #fff; 
+    padding: 10px; 
+    text-align: center; 
+} 
+    
+.chat-body { 
+    flex: 1; 
+    padding: 20px; 
+    overflow-y: auto; 
+} 
+    
+.user-message { 
+    text-align: right; 
+    color: #007bff; 
+    margin-bottom: 10px; 
+} 
+    
+.bot-message { 
+    text-align: left; 
+    color: #333; 
+    margin-bottom: 10px; 
+} 
+    
+.user-message p, .bot-message p { 
+    margin: 5px 0; 
+} 
+    
+.chat-input { 
+    padding: 10px; 
+    background-color: #f7f7f7; 
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: space-between; /* Add space between items */
+    align-items: center; /* Center items vertically */
+} 
+
+.chat-input input[type="text"] { 
+    flex: 1; /* Take up remaining space */
+    padding: 8px; 
+    border: none; 
+    border-radius: 5px; 
+    margin-right: 10px; 
+    font-size: 16px; 
+    width: 100%; /* Take up full width of the container */
+} 
+
+    
+.chat-input button { 
+    padding: 8px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    background-color: #007bff; 
+    color: #fff; 
+    cursor: pointer; 
+    font-size: 16px; 
+} 
+
+.product-image {
+    max-width: 100px; 
+    margin-right: 20px;
+}
+
+.product-container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.product-container img {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.product-details {
+    display: inline-block;
+}
+</style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Flipkart Chatbot</h1>
+        </div>
+        <div class="chat-body" id="chat-container">
+            <div class="bot-message">
+                <p>{{ default_message }}</p>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user_query" name="user_query" placeholder="Enter your query">
+            <button type="submit" onclick="submitQuery()">Submit</button>
+        </div>
+    </div>
+    <script>     
+    function submitQuery() {
+        var query = document.getElementById("user_query").value;
+        var chatContainer = document.getElementById("chat-container");
+    
+        // Display user query in chat container
+        var userQueryElement = document.createElement("div");
+        userQueryElement.className = "user-message";
+        userQueryElement.innerHTML = "<p>You: " + query + "</p>";
+        chatContainer.appendChild(userQueryElement);
+    
+        // Send query to server and display response
+        fetch("/get_products", {
+            method: "POST",
+            body: new URLSearchParams({
+                user_query: query
+            }),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        .then(response => response.text())
+        .then(data => {
+            var responseElement = document.createElement("div");
+            responseElement.className = "bot-message";
+            responseElement.innerHTML = data;
+            chatContainer.appendChild(responseElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    
+        // Clear input field
+        document.getElementById("user_query").value = "";
+    }
+    </script>
+    </body>
+</html>
